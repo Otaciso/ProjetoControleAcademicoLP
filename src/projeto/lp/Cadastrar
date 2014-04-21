@@ -1,4 +1,3 @@
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -20,7 +19,9 @@ public class Cadastrar {
             }            
         }
         
-        disciplinas.add(novaDisciplina);         
+        disciplinas.add(novaDisciplina);
+        System.out.println("Disciplina cadastrada com sucesso");       
+
     }
 	
 	public void cadastraAluno(Aluno novoAluno){
@@ -29,7 +30,8 @@ public class Cadastrar {
                 return;  
             }
         }
-        alunos.add(novoAluno);    
+        alunos.add(novoAluno);
+        System.out.println("Aluno Cadastrado com sucesso");
     }
     
     public void cadastraProfessor(Professor novoProfessor){
@@ -38,7 +40,8 @@ public class Cadastrar {
                 return;            
             }            
         }
-        professores.add(novoProfessor);       
+        professores.add(novoProfessor);
+        System.out.println("Professor Cadastrado com sucesso");
     }
 
 }
