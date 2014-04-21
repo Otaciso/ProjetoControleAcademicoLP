@@ -1,0 +1,44 @@
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class Cadastrar {
+	private List<Disciplina> disciplinas;
+	private List<Aluno> alunos;
+	private List<Professor> professores;
+	
+	public Cadastrar(){
+		disciplinas = new ArrayList<Disciplina>();
+		alunos = new ArrayList<Aluno>();
+		professores = new ArrayList<Professor>();	
+	}
+	
+	public void cadastraDisciplinas(Disciplina novaDisciplina){
+        for (Disciplina disciplinaAntiga : disciplinas ){
+            if ((disciplinaAntiga != null) && (disciplinaAntiga.getIdentificacao().equals(novaDisciplina.getIdentificacao()))){
+                return;            
+            }            
+        }
+        
+        disciplinas.add(novaDisciplina);         
+    }
+	
+	public void cadastraAluno(Aluno novoAluno){
+        for (Aluno alunoAntigos : alunos ){
+            if ((alunoAntigos != null) && (alunoAntigos.getCpf().equals(novoAluno.getCpf()))){
+                return;  
+            }
+        }
+        alunos.add(novoAluno);    
+    }
+    
+    public void cadastraProfessor(Professor novoProfessor){
+        for (Professor professorAntigo : professores ){
+            if ((professorAntigo != null) && (professorAntigo.getMatricula().equals(novoProfessor.getMatricula()))){
+                return;            
+            }            
+        }
+        professores.add(novoProfessor);       
+    }
+
+}
