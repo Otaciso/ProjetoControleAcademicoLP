@@ -1,0 +1,27 @@
+import java.util.List;
+
+public class Consultar {
+	
+	private List<Aluno> alunos;
+	private List<Professor> professores;
+	    
+    public Aluno pesquisaAlunoPelaMatricula(String matricula){
+        for(Aluno al: this.alunos){
+              if(al.getMatricula() == matricula){
+                  return al;
+                }      
+            }
+        return null;    
+    }
+    
+    public Professor consultaProfessorPeloCpf(String cpf){
+        for(Professor pr: this.professores){
+              if(pr.getCpf() == cpf){
+                  return pr;
+                }
+            }
+        return null;    
+    }
+}
+
+
