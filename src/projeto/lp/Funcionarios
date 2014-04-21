@@ -1,0 +1,27 @@
+import java.util.List;
+
+public class Funcionario extends Pessoa{
+	
+	private List<Aluno> alunos;
+	
+	public Aluno pesquisaAlunoPelaMatricula(String matricula){
+	        for(Aluno al: this.alunos){
+	              if(al.getMatricula() == matricula){
+	                  System.out.println(al);
+	                }      
+	            }
+	        return null;    
+	}
+	
+	public Disciplina pesquisaDisciplinaQueOAlunoEstaMatriculado(String nome){
+	        for(Disciplina dsc: this.disciplinas){
+	              if(dsc.getnomea() == nome){
+	                  System.out.println(dsc);
+	                }      
+	            }
+	        return null;    
+	}
+	
+
+	
+}
