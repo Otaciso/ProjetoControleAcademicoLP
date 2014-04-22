@@ -1,0 +1,26 @@
+package projeto;
+
+public class Horario {
+
+	public static final String SEGUNDA = "SEG";
+	public static final String TERCA = "TER";
+	public static final String QUARTA = "QUAR";
+	public static final String QUINTA = "QUIN";
+	public static final String SEXTA = "SEX";
+	public static final String SABADO = "SAB";
+	public static final String DOMIGO = "DOMI";
+	private String diaDaSemana;
+
+	public Horario(String diaDaSemana, int horaInicio, int horaFim) {
+		this.diaDaSemana = diaDaSemana;
+	}
+
+	public String getDiaDaSemana() {
+		return diaDaSemana;
+	}
+
+	public void setDiaDaSemana(String diaDaSemana) {
+		this.diaDaSemana = diaDaSemana;
+	}
+
+}
