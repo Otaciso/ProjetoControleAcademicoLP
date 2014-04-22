@@ -1,0 +1,62 @@
+package projeto;
+
+import java.util.*;
+
+public class Professor extends Pessoa {
+
+	private List<Turma> turmasCadastradas;
+
+	public Professor(Pessoa pessoa,String nome, String matricula) throws Exception {
+		super(pessoa.getNome(), pessoa.getIdade(), pessoa.getSexo(), pessoa
+				.getCpf(), pessoa.getRg(), pessoa.getEndereco(), pessoa
+				.getMatricula());	
+	}
+
+	public String getNomesDisciplinas(Disciplina[] dici) {
+		String nomes = "";
+		for (int i = 0; i < dici.length; i++) {
+			Disciplina d = dici[i];
+			nomes += d.getNome();
+			if (i != dici.length - 1) {
+				nomes += ",";
+			}
+		}
+		return nomes;
+	}
+
+	public void addTurma(Turma turmasNovas) {
+		turmasCadastradas.add(turmasNovas);
+
+	}
+
+	public void removeTurma(Turma turmasAntigas) {
+		turmasCadastradas.remove(turmasAntigas);
+	}
+
+	public List<Turma> getTurmasAlocado() {
+		return this.turmasCadastradas;
+	}
+
+	public String getDados() {
+		return "Nome: " + getNome() + "\nMatricula: " + getMatricula();
+	}
+
+	public List<Disciplina> getDisciplinasCadastradas() {
+		List<Disciplina> disciplina = new ArrayList<Disciplina>();
+		for (Turma turma : this.turmasCadastradas) {
+			if (disciplina.contains(turma.getDisciplina())) {
+				disciplina.add(turma.getDisciplina());
+			}
+		}
+		return disciplina;
+	}
+
+	public List<Horario> getHorarios() {
+		List<Horario> horario = new ArrayList<Horario>();
+		for (Turma turma : this.turmasCadastradas) {
+			horario.addAll(turma.getHorario());
+		}
+		return horario;
+	}
+
+}
