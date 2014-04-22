@@ -1,4 +1,4 @@
-package projeto.lp;
+package projeto;
 
 public class Endereco {
 
@@ -77,10 +77,10 @@ public class Endereco {
 	public void setEstado(String estado) {
 		this.estado = estado;
 	}
-	
-	public String toString(){
-		return "Rua ;" + getRua() + "\nNumero ;" + getNumero() +
-				"\nBairro ;" + getBairro()+ "\nCidade ;" + getCidade() +
-				"\nEstado ;" + getEstado();
+
+	public String toString() {
+		return "Rua ;" + getRua() + "\nNumero ;" + getNumero() + "\nBairro ;"
+				+ getBairro() + "\nCidade ;" + getCidade() + "\nEstado ;"
+				+ getEstado();
 	}
 }
