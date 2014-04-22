@@ -1,0 +1,18 @@
+package projeto;
+
+public class Aluno extends Pessoa {
+
+	public Aluno(Pessoa pessoa, String matricula, String nome) throws Exception {
+		super(pessoa.getNome(), pessoa.getIdade(), pessoa.getSexo(), pessoa
+				.getCpf(), pessoa.getRg(), pessoa.getEndereco(), pessoa
+				.getMatricula());
+	}
+
+	public String toString() {
+		String dados = new String();
+		dados += this.getMatricula() + "\n";
+		dados += this.getNome() + "\n";
+		return dados;
+	}
+
+}
