@@ -1,27 +1,36 @@
-import java.util.List;
+package projeto;
 
-public class Funcionario extends Pessoa{
-	
-	private List<Aluno> alunos;
-	
-	public Aluno pesquisaAlunoPelaMatricula(String matricula){
-	        for(Aluno al: this.alunos){
-	              if(al.getMatricula() == matricula){
-	                  System.out.println(al);
-	                }      
-	            }
-	        return null;    
-	}
-	
-	public Disciplina pesquisaDisciplinaQueOAlunoEstaMatriculado(String nome){
-	        for(Disciplina dsc: this.disciplinas){
-	              if(dsc.getnomea() == nome){
-	                  System.out.println(dsc);
-	                }      
-	            }
-	        return null;    
-	}
-	
+public class Funcionario extends Pessoa {
 
-	
+	private double salario;
+	private String cargo;
+
+	public Funcionario(Pessoa pessoa, String matricula, double salario, String cargo) throws Exception {
+		super(pessoa.getNome(), pessoa.getIdade(), pessoa.getSexo(), pessoa.getCpf(), pessoa.getRg(), pessoa.getEndereco(), pessoa.getMatricula());
+		this.salario = salario;
+		this.cargo = cargo;
+	}
+
+
+	public double getSalario() {
+		return salario;
+	}
+
+	public void setSalario(double salario) {
+		this.salario = salario;
+	}
+
+	public String getCargo() {
+		return cargo;
+	}
+
+	public void setCargo(String cargo) {
+		this.cargo = cargo;
+	}
+
+	public String toString() {
+		return super.toString() + "\n" + "\nMatricula: " + getMatricula()
+				+ "\nCargo: " + getCargo() + "\nSalario: " + getSalario();
+	}
+
 }
