@@ -1,0 +1,73 @@
+package projeto;
+
+import java.util.*;
+
+public class Disciplina {
+	private String nome;
+	private String identificacao;
+	private List<Turma> turmas;
+
+	public Disciplina(String nome, String identificacao) {
+		this.nome = nome;
+		this.identificacao = identificacao;
+	}
+
+	public List<Turma> getTurmas() {
+		return turmas;
+	}
+
+	public void setTurmas(List<Turma> turmas) {
+		this.turmas = turmas;
+	}
+
+	public String getNome() {
+		return nome;
+	}
+
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	public String getIdentificacao() {
+		return identificacao;
+	}
+
+	public void setIdentificacao(String identificacao) {
+		this.identificacao = identificacao;
+	}
+
+	public void removeTurma(String numero) {
+		for (Turma tur : turmas) {
+			if (tur.getNumero().equals(numero)) {
+				this.turmas.remove(tur);
+				break;
+			}
+		}
+	}
+
+	public void adicionaTurma(String numero) throws TurmaJaExisteException {
+		for (Turma turm : this.turmas) {
+			if (turm.getNumero().equals(numero)) {
+				throw new TurmaJaExisteException("Já existe a turma de número:"
+						+ numero);
+			}
+		}
+		// Pessoal é o seguinte caso não seja lançado a exceção, e adcionado uma
+		// nova turma:
+		Turma turma = new Turma(identificacao, null, null, null);
+		this.turmas.add(turma);
+
+	}
+
+	public String toString() {
+		String string = new String();
+		string += this.nome + "\n";
+		string += this.getIdentificacao() + "\n";
+		for (Turma t : this.turmas) {
+			string += t.toString();
+		}
+		return string;
+
+	}
+
+}
