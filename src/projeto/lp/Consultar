@@ -1,27 +1,214 @@
-import java.util.List;
+package projeto;
 
-public class Consultar {
-	
+import java.util.*;
+
+public class ConsultarECadastrar {
 	private List<Aluno> alunos;
 	private List<Professor> professores;
-	    
-    public Aluno pesquisaAlunoPelaMatricula(String matricula){
-        for(Aluno al: this.alunos){
-              if(al.getMatricula() == matricula){
-                  return al;
-                }      
-            }
-        return null;    
-    }
-    
-    public Professor consultaProfessorPeloCpf(String cpf){
-        for(Professor pr: this.professores){
-              if(pr.getCpf() == cpf){
-                  return pr;
-                }
-            }
-        return null;    
-    }
+	private List<Disciplina> disciplinas;
+
+	// Aluno
+
+	public void cadastraAluno(String nome, String matricula)
+			throws Exception {
+		try {
+			this.pesquisaAlunoPelaMatricula(matricula);
+			throw new AlunoJaExisteException("Aluno Ja é Existente: " + nome);
+		} catch (AlunoInexistenteException ex) {
+			this.alunos.add(new Aluno( null, nome, matricula));
+		}
+	}
+
+	public void removeAluno(String matricula) throws AlunoInexistenteException {
+		boolean b = false;
+		for (Aluno aluno : this.alunos) {
+			if (aluno.getMatricula().equals(matricula)) {
+				b = true;
+				this.alunos.remove(aluno);
+			}
+		}
+		if (!b) {
+			throw new AlunoInexistenteException("Erro Aluno Não Existe");
+		}
+	}
+
+	private void pesquisaAlunoPelaMatricula(String matricula)
+			throws Exception {
+		try {
+			this.pesquisaAlunoPelaMatricula(matricula);
+			throw new AlunoJaExisteException("Aluno Já Existente");
+		} catch (AlunoInexistenteException ex) {
+			this.alunos.add(new Aluno(null, matricula, null));
+		}
+
+	}
+
+	// Professor
+
+	public void cadastraProfessor(String nome, String matricula)
+			throws Exception {
+		try {
+			this.pesquisaProfessorPelaMatricula(matricula);
+			throw new ProfessorJaExisteException("Professor Cadastrado!");
+		} catch (ProfessorInexistenteException ex) {
+			this.professores.add(new Professor(null, nome, matricula));
+		}
+	}
+
+	public void removeProfessor(String matricula)
+			throws ProfessorInexistenteException {
+		boolean delete = false;
+		for (Professor professor : this.professores) {
+			if (matricula.equals(professor.getMatricula())) {
+				this.professores.remove(professor);
+			}
+		}
+		if (!delete) {
+			throw (new ProfessorInexistenteException(
+					"Esse Professor é Inexistente"));
+		}
+	}
+
+	public Professor pesquisaProfessorPelaMatricula(String matricula)
+			throws ProfessorInexistenteException {
+		for (Professor pro : this.professores) {
+			if (pro.getMatricula().equals(matricula)) {
+				return pro;
+			}
+		}
+		throw new ProfessorInexistenteException("Erro! O professor não existe!");
+	}
+
+	public List<Professor> pesquisaProfessorPeloNome(String nome) {
+		List<Professor> pro = new ArrayList<Professor>();
+		for (Professor professor : this.professores) {
+			if (professor.getNome().indexOf(nome) != -1) {
+				pro.add(professor);
+			}
+		}
+		return pro;
+	}
+
+	public void adicionaDisciplina(String nome, String identificacao)
+			throws DisciplinaJaExisteException {
+		try {
+			this.pesquisaDisciplina(identificacao);
+			throw new DisciplinaJaExisteException("Ja Existe Esta Disciplina");
+		} catch (DisciplinaInexistenteException ex) {
+			this.disciplinas.add(new Disciplina(nome, identificacao));
+		}
+	}
+
+	public void removeDisciplina(String identificacao)
+			throws DisciplinaInexistenteException {
+		for (Disciplina disciplina : this.disciplinas) {
+			if (disciplina.getIdentificacao().equals(disciplinas)) {
+				this.disciplinas.remove(disciplinas);
+			}
+		}
+		throw new DisciplinaInexistenteException(
+				"Erro Esta Disciplina não existe!");
+	}
+
+	public Disciplina pesquisaDisciplina(String identificacao)
+			throws DisciplinaInexistenteException {
+		for (Disciplina disciplina : this.disciplinas) {
+			if (disciplina.getIdentificacao().equals(identificacao)) {
+				return disciplina;
+			}
+		}
+		throw new DisciplinaInexistenteException(
+				"Erro Não existe Essa Dsiciplina!");
+	}
+
+	// Turma
+
+	public void adicionaTurma(String identificacao, String numTurma)
+			throws DisciplinaInexistenteException, TurmaJaExisteException {
+		Disciplina disciplina = this.pesquisaDisciplina(identificacao);
+		disciplina.adicionaTurma(numTurma);
+	}
+
+	public void removeTurma(String identificacao, String numTurma)
+			throws DisciplinaInexistenteException {
+		Disciplina dis = null;
+		try {
+			dis = this.pesquisaDisciplina(identificacao);
+			throw new DisciplinaInexistenteException("Turma Existente");
+
+		} catch (DisciplinaInexistenteException ex) {
+			dis.removeTurma(numTurma);
+		}
+	}
+
+	public Turma pesquisaTurma(String identificacao, String numTurma)
+			throws DisciplinaInexistenteException, TurmaInexistenteException {
+		for (Turma turma : this.pesquisaDisciplina(identificacao).getTurmas()) {
+			if (turma.getNumero().equals(numTurma)) {
+				return turma;
+			}
+		}
+		throw new DisciplinaInexistenteException("Turma Existente");
+	}
+
+	public void cadastraHorarioTurma(String identificacao, String numTurma,
+			String dia, int horaInicio, int horaFim)
+			throws DisciplinaInexistenteException, TurmaInexistenteException {
+		for (Turma turma : this.pesquisaDisciplina(identificacao).getTurmas()) {
+			if (turma.getNumero().equals(numTurma)) {
+				turma.adicionaHorario(new Horario(dia, horaInicio, horaFim));
+			}
+
+		}
+
+	}
+
+	public void cadastraProfessorATurma(String identificacao, String numTurma,
+			String matriculaProf) throws DisciplinaInexistenteException,
+			TurmaInexistenteException, ProfessorInexistenteException {
+		for (Turma turma : this.pesquisaDisciplina(identificacao).getTurmas()) {
+			if (turma.getNumero().equals(numTurma)) {
+				this.pesquisaProfessorPelaMatricula(matriculaProf).addTurma(
+						turma);
+				turma.setProfessor(this
+						.pesquisaProfessorPelaMatricula(matriculaProf));
+			}
+		}
+	}
+
+	public void removeProfessorDaTurma(String codDisciplina, String numTurma,
+			String matricula) throws DisciplinaInexistenteException,
+			TurmaInexistenteException, ProfessorInexistenteException {
+		boolean valor = true;
+		for (Turma turma : this.pesquisaDisciplina(numTurma).getTurmas()) {
+			if (turma.getNumero() == numTurma) {
+				this.pesquisaProfessorPelaMatricula(matricula).removeTurma(
+						turma);
+				valor = false;
+			}
+		}
+		if (valor) {
+			throw new TurmaInexistenteException("Turma Inexistente");
+		}
+	}
+
+	public List<Horario> pesquisaHorariosProfessor(String matricula)
+			throws ProfessorInexistenteException {
+		List<Horario> horario = new ArrayList<Horario>();
+		for (Professor professor : this.professores) {
+			if (professor.getMatricula().equals(matricula)) {
+				horario = professor.getHorarios();
+			}
+			return horario;
+		}
+		throw new ProfessorInexistenteException("Professor Inexistente");
+	}
+
+	public List<Disciplina> pesquisaDisciplinasDoProfessor(String matricula)
+			throws ProfessorInexistenteException {
+		return this.pesquisaProfessorPelaMatricula(matricula)
+				.getDisciplinasCadastradas();
+
+	}
+
 }
-
-
