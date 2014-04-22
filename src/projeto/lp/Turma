@@ -1,0 +1,63 @@
+package projeto;
+
+import java.util.*;
+
+public class Turma {
+
+	private String numero;
+	private Professor professor;
+	private Disciplina disciplina;
+	private List<Horario> horarios;
+
+	public Turma(String numero, Professor professor, Disciplina disciplina,
+			List<Horario> horarios) {
+		this.numero = numero;
+		this.professor = professor;
+		this.disciplina = disciplina;
+		this.horarios = horarios;
+	}
+
+	public String getNumero() {
+		return numero;
+	}
+
+	public void setNumero(String numero) {
+		this.numero = numero;
+	}
+
+	public Professor getProfessor() {
+		return professor;
+	}
+
+	public void setProfessor(Professor professor) {
+		this.professor = professor;
+	}
+
+	public Disciplina getDisciplina() {
+		return disciplina;
+	}
+
+	public void setDisciplina(Disciplina disciplina) {
+		this.disciplina = disciplina;
+	}
+
+	public List<Horario> getHorario() {
+		return horarios;
+	}
+
+	public void setHorario(List<Horario> horario) {
+		this.horarios = horario;
+	}
+
+	public void addTurma(Horario horario) {
+		horarios.add(horario);
+	}
+
+	public String toString() {
+		return "Turma [numero= " + numero + ", disciplina= " + disciplina + "]";
+	}
+
+	public void adicionaHorario(Horario horario) {
+		horarios.add(horario);
+	}
+}
